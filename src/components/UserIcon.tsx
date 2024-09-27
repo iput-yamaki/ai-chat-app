@@ -1,0 +1,44 @@
+"use client";
+import React from 'react'
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { useAuth } from '@/context/AuthContext'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from './ui/dropdown-menu';
+import { signOut } from 'firebase/auth';
+import { auth } from '@/lib/firebase/firebaseClient';
+import { useRouter } from 'next/navigation';
+import { error } from 'console';
+
+
+
+const UserIcon = () => {
+    const router = useRouter();
+    const {currentUser} = useAuth();
+    console.log(currentUser?.photoURL)
+    const photoURL = currentUser?.photoURL ? currentUser.photoURL : undefined;
+    const handleLogout = () =>{
+        signOut(auth).then(()=>{
+            router.push("/login");
+
+        }).catch((error) => {
+            console.log(error);
+        } )
+
+    }
+  return (
+    <DropdownMenu>
+        <DropdownMenuTrigger>
+            <Avatar className='h-8 w-8'>
+                <AvatarImage src={photoURL} />
+                <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+            <DropdownMenuLabel>{currentUser?.displayName}</DropdownMenuLabel>
+            <DropdownMenuItem onClick={handleLogout}>ログアウト</DropdownMenuItem>
+        </DropdownMenuContent>
+    </DropdownMenu>
+
+  )
+}
+
+export default UserIcon
