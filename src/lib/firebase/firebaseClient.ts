@@ -3,12 +3,12 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth"; // 修正: 正し�
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAzheCxv8_v3M3ov3PTiGawtwoOi5VjJpY",
-  authDomain: "test-3ec51.firebaseapp.com",
-  projectId: "test-3ec51",
-  storageBucket: "test-3ec51.appspot.com",
-  messagingSenderId: "1091886481728",
-  appId: "1:1091886481728:web:607a4e6169238bd31cbaa5"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
 // Firebaseアプリの初期化
